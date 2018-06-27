@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "A server side of the circuit breaker design pattern",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "abhinav dhasmana",
+  "license": "ISC",
+  "dependencies": {
+    "good": "^8.1.1",
+    "good-console": "^7.1.0",
+    "good-squeeze": "^5.1.0",
+    "hapi": "^17.5.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0"
+  }
+}
