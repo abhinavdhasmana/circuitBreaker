@@ -28,11 +28,11 @@ server.route({
   path: '/flakycall',
   handler: async (request, h) => {
     const currentTime = Date.now();
-    if ((currentTime - serverStartTime) < (1000 * 60)) {
+    if ((currentTime - serverStartTime) < (1000 * 60 * 5)) {
       const result = await new Promise((resolve) => {
         setTimeout(() => {
           resolve('This is a delayed repsonse');
-        }, 2000);
+        }, 5000);
       });
       return h.response(result);
     }

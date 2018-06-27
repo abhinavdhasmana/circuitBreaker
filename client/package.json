@@ -1,7 +1,7 @@
 {
-  "name": "server",
+  "name": "client",
   "version": "1.0.0",
-  "description": "A server side of the circuit breaker design pattern",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "npm test",
@@ -10,6 +10,8 @@
   "author": "abhinav dhasmana",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
+    "boom": "^7.2.0",
     "good": "^8.1.1",
     "good-console": "^7.1.0",
     "good-squeeze": "^5.1.0",
