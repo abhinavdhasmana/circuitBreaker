@@ -21,14 +21,17 @@ const server = Hapi.server({
   port: 8000,
 });
 
+let numberOfRequest = 0;
 const serverStartTime = Date.now();
 
 server.route({
   method: 'GET',
   path: '/flakycall',
   handler: async (request, h) => {
+    numberOfRequest += 1;
     const currentTime = Date.now();
     if ((currentTime - serverStartTime) < (1000 * 60 * 5)) {
+      console.log('numberOfRequest received on server:', numberOfRequest);
       const result = await new Promise((resolve) => {
         setTimeout(() => {
           resolve('This is a delayed repsonse');

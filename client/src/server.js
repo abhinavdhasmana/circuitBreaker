@@ -1,7 +1,7 @@
 const Hapi = require('hapi');
 const Good = require('good');
-const axios = require('axios');
 const Boom = require('boom');
+const CircuitBreaker = require('./circuitBreaker');
 
 const options = {
   reporters: {
@@ -22,6 +22,8 @@ const server = Hapi.server({
   port: 8001,
 });
 
+let numberOfRequest = 0;
+
 server.route({
   method: 'GET',
   path: '/data2',
@@ -34,17 +36,18 @@ server.route({
   },
 });
 
+const circuitBreaker = new CircuitBreaker(3000, 5, 2000);
+
+
 server.route({
   method: 'GET',
   path: '/data',
   handler: async (request, h) => {
+    numberOfRequest += 1;
     try {
-      const response = await axios({
-        url: 'http://0.0.0.0:8000/flakycall',
-        timeout: 6000,
-        method: 'get',
-
-      });
+      console.log('numberOfRequest received on client:', numberOfRequest);
+      const response = await circuitBreaker.call('http://0.0.0.0:8000/flakycall');
+      // console.log('response is ', response.data);
       return h.response(response.data);
     } catch (err) {
       throw Boom.clientTimeout(err);
